@@ -3,5 +3,5 @@ import { IsOptional, IsString } from 'class-validator';
 export class GetFilmsQueryDto {
   @IsOptional()
   @IsString()
-  name!: string;
+  title!: string;
 }

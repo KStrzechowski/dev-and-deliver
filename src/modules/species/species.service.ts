@@ -9,9 +9,9 @@ export class SpeciesService {
   ) {}
 
   public async getSpecies(query: GetSpeciesQueryDto) {
-    const { page, limit } = query;
+    const { page, limit, name } = query;
 
-    return await this.speciesDataAccessLayer.getSpecies(page, limit);
+    return await this.speciesDataAccessLayer.getSpecies(page, limit, name);
   }
 
   public async getSpecie(params: GetSpecieParamsDto) {

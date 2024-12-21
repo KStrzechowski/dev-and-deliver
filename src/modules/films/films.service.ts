@@ -7,9 +7,9 @@ export class FilmsService {
   constructor(private readonly filmsDataAccessLayer: FilmsDataAccessLayer) {}
 
   public async getFilms(query: GetFilmsQueryDto) {
-    const {} = query;
+    const { title } = query;
 
-    return await this.filmsDataAccessLayer.getFilms();
+    return await this.filmsDataAccessLayer.getFilms(title);
   }
 
   public async getFilm(params: GetFilmParamsDto) {
