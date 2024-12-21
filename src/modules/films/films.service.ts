@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FilmsDataAccessLayer } from './films.dal';
-import { GetFilmsQueryDto } from './dtos';
+import { GetFilmParamsDto, GetFilmsQueryDto } from './dtos';
 
 @Injectable()
 export class FilmsService {
@@ -10,5 +10,11 @@ export class FilmsService {
     const {} = query;
 
     return await this.filmsDataAccessLayer.getFilms();
+  }
+
+  public async getFilm(params: GetFilmParamsDto) {
+    const { id } = params;
+
+    return await this.filmsDataAccessLayer.getFilm(id);
   }
 }

@@ -1,6 +1,6 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { SpeciesService } from './species.service';
-import { GetSpeciesQueryDto } from './dtos';
+import { GetSpecieParamsDto, GetSpeciesQueryDto } from './dtos';
 
 @Controller('species')
 export class SpeciesController {
@@ -9,5 +9,10 @@ export class SpeciesController {
   @Get('/')
   async getSpecies(@Query() query: GetSpeciesQueryDto) {
     return await this.speciesService.getSpecies(query);
+  }
+
+  @Get('/:id')
+  async getSpecie(@Param() params: GetSpecieParamsDto) {
+    return await this.speciesService.getSpecie(params);
   }
 }

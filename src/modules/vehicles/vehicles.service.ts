@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { VehiclesDataAccessLayer } from './vehicles.dal';
-import { GetVehiclesQueryDto } from './dtos';
+import { GetVehicleParamsDto, GetVehiclesQueryDto } from './dtos';
 
 @Injectable()
 export class VehiclesService {
@@ -12,5 +12,11 @@ export class VehiclesService {
     const {} = query;
 
     return await this.vehiclesDataAccessLayer.getVehicles();
+  }
+
+  public async getVehicle(params: GetVehicleParamsDto) {
+    const { id } = params;
+
+    return await this.vehiclesDataAccessLayer.getVehicle(id);
   }
 }

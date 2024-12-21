@@ -1,18 +1,18 @@
 import { Logger } from '@nestjs/common';
 import axios from 'axios';
-import { SWAPI_FILMS_ROUTE, SWAPI_URL } from 'src/constants';
+import { SWAPI_PEOPLE_ROUTE, SWAPI_URL } from 'src/constants';
 
-export class FilmsDataAccessLayer {
-  private logger = new Logger(FilmsDataAccessLayer.name);
+export class PeopleDataAccessLayer {
+  private logger = new Logger(PeopleDataAccessLayer.name);
 
-  public async getFilms() {
+  public async getPeople() {
     let result;
     try {
       const API = axios.create({
         baseURL: SWAPI_URL,
       });
 
-      const response = await API.get(SWAPI_FILMS_ROUTE);
+      const response = await API.get(SWAPI_PEOPLE_ROUTE);
       result = response.data.result;
     } catch (err) {
       this.logger.error(err);
@@ -22,14 +22,14 @@ export class FilmsDataAccessLayer {
     return result;
   }
 
-  public async getFilm(id: string) {
+  public async getPerson(id: string) {
     let result;
     try {
       const API = axios.create({
         baseURL: SWAPI_URL,
       });
 
-      const response = await API.get(SWAPI_FILMS_ROUTE + id);
+      const response = await API.get(SWAPI_PEOPLE_ROUTE + id);
       result = response.data.result;
     } catch (err) {
       this.logger.error(err);

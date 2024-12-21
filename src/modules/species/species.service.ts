@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SpeciesDataAccessLayer } from './species.dal';
-import { GetSpeciesQueryDto } from './dtos';
+import { GetSpecieParamsDto, GetSpeciesQueryDto } from './dtos';
 
 @Injectable()
 export class SpeciesService {
@@ -12,5 +12,11 @@ export class SpeciesService {
     const {} = query;
 
     return await this.speciesDataAccessLayer.getSpecies();
+  }
+
+  public async getSpecie(params: GetSpecieParamsDto) {
+    const { id } = params;
+
+    return await this.speciesDataAccessLayer.getSpecie(id);
   }
 }

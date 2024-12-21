@@ -1,6 +1,6 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { PlanetsService } from './planets.service';
-import { GetPlanetsQueryDto } from './dtos';
+import { GetPlanetParamsDto, GetPlanetsQueryDto } from './dtos';
 
 @Controller('planets')
 export class PlanetsController {
@@ -9,5 +9,10 @@ export class PlanetsController {
   @Get('/')
   async getPlanets(@Query() query: GetPlanetsQueryDto) {
     return await this.planetsService.getPlanets(query);
+  }
+
+  @Get('/:id')
+  async getPlanet(@Param() params: GetPlanetParamsDto) {
+    return await this.planetsService.getPlanet(params);
   }
 }

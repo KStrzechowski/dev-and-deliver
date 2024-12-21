@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PlanetsDataAccessLayer } from './planets.dal';
-import { GetPlanetsQueryDto } from './dtos';
+import { GetPlanetParamsDto, GetPlanetsQueryDto } from './dtos';
 
 @Injectable()
 export class PlanetsService {
@@ -12,5 +12,11 @@ export class PlanetsService {
     const {} = query;
 
     return await this.planetsDataAccessLayer.getPlanets();
+  }
+
+  public async getPlanet(params: GetPlanetParamsDto) {
+    const { id } = params;
+
+    return await this.planetsDataAccessLayer.getPlanet(id);
   }
 }
