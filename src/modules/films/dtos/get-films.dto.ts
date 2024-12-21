@@ -1,3 +1,7 @@
-import { PaginationDto } from '../../../types';
+import { IsOptional, IsString } from 'class-validator';
 
-export class GetFilmsQueryDto extends PaginationDto {}
+export class GetFilmsQueryDto {
+  @IsOptional()
+  @IsString()
+  name!: string;
+}

@@ -9,9 +9,9 @@ export class VehiclesService {
   ) {}
 
   public async getVehicles(query: GetVehiclesQueryDto) {
-    const {} = query;
+    const { page, limit } = query;
 
-    return await this.vehiclesDataAccessLayer.getVehicles();
+    return await this.vehiclesDataAccessLayer.getVehicles(page, limit);
   }
 
   public async getVehicle(params: GetVehicleParamsDto) {

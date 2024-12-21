@@ -5,15 +5,19 @@ import { SWAPI_URL, SWAPI_VEHICLES_ROUTE } from 'src/constants';
 export class VehiclesDataAccessLayer {
   private logger = new Logger(VehiclesDataAccessLayer.name);
 
-  public async getVehicles() {
+  public async getVehicles(page: number, limit: number) {
     let result;
     try {
       const API = axios.create({
         baseURL: SWAPI_URL,
       });
 
-      const response = await API.get(SWAPI_VEHICLES_ROUTE);
-      result = response.data.result;
+      const response = await API.get(
+        `${SWAPI_VEHICLES_ROUTE}?page=${page}&limit=${limit}`,
+      );
+
+      result = response.data;
+      // TODO - change previous/next page link
     } catch (err) {
       this.logger.error(err);
       result = err.message;

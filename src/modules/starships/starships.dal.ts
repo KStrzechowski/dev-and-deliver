@@ -5,15 +5,19 @@ import { SWAPI_STARSHIPS_ROUTE, SWAPI_URL } from 'src/constants';
 export class StarshipsDataAccessLayer {
   private logger = new Logger(StarshipsDataAccessLayer.name);
 
-  public async getStarships() {
+  public async getStarships(page: number, limit: number) {
     let result;
     try {
       const API = axios.create({
         baseURL: SWAPI_URL,
       });
 
-      const response = await API.get(SWAPI_STARSHIPS_ROUTE);
-      result = response.data.result;
+      const response = await API.get(
+        `${SWAPI_STARSHIPS_ROUTE}?page=${page}&limit=${limit}`,
+      );
+
+      result = response.data;
+      // TODO - change previous/next page link);
     } catch (err) {
       this.logger.error(err);
       result = err.message;

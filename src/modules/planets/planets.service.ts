@@ -9,9 +9,9 @@ export class PlanetsService {
   ) {}
 
   public async getPlanets(query: GetPlanetsQueryDto) {
-    const {} = query;
+    const { page, limit } = query;
 
-    return await this.planetsDataAccessLayer.getPlanets();
+    return await this.planetsDataAccessLayer.getPlanets(page, limit);
   }
 
   public async getPlanet(params: GetPlanetParamsDto) {

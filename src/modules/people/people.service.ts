@@ -7,9 +7,9 @@ export class PeopleService {
   constructor(private readonly peopleDataAccessLayer: PeopleDataAccessLayer) {}
 
   public async getPeople(query: GetPeopleQueryDto) {
-    const {} = query;
+    const { page, limit } = query;
 
-    return await this.peopleDataAccessLayer.getPeople();
+    return await this.peopleDataAccessLayer.getPeople(page, limit);
   }
 
   public async getPerson(params: GetPersonParamsDto) {

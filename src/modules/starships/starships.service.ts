@@ -9,9 +9,9 @@ export class StarshipsService {
   ) {}
 
   public async getStarships(query: GetStarshipsQueryDto) {
-    const {} = query;
+    const { page, limit } = query;
 
-    return await this.starshipsDataAccessLayer.getStarships();
+    return await this.starshipsDataAccessLayer.getStarships(page, limit);
   }
 
   public async getStarship(params: GetStarshipParamsDto) {
