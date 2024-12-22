@@ -1,6 +1,7 @@
 import { ConfigModule } from 'nestjs-config';
 import { Module } from '@nestjs/common';
-import { CacheModule } from '@nestjs/cache-manager';
+import { CacheModule, CacheStore } from '@nestjs/cache-manager';
+import { redisStore } from 'cache-manager-redis-yet';
 import { resolve } from 'path';
 import { FilmsModule } from './modules/films/films.module';
 import { PlanetsModule } from './modules/planets/planets.module';
@@ -17,9 +18,21 @@ import { PeopleModule } from './modules/people/people.module';
         modifyConfigName: (name) => name.replace('.config', ''),
       },
     ),
-    CacheModule.register({
+    CacheModule.registerAsync({
       isGlobal: true,
-      ttl: 1000 * 3600 * 24,
+      useFactory: async () => {
+        const store = await redisStore({
+          socket: {
+            host: 'redis',
+            port: 6379,
+          },
+          ttl: 1000 * 3600 * 24,
+        });
+
+        return {
+          store: store as unknown as CacheStore,
+        };
+      },
     }),
     FilmsModule,
     PeopleModule,
