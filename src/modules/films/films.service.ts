@@ -53,8 +53,6 @@ export class FilmsService {
     const cacheKey = '/films/opening/words';
     const cacheResult = (await this.cacheManager.get(cacheKey)) as Film;
     if (cacheResult) {
-      console.log('YES');
-
       return cacheResult;
     }
 
@@ -78,7 +76,6 @@ export class FilmsService {
     const cacheKey = '/films/opening/people';
     const cacheResult = (await this.cacheManager.get(cacheKey)) as string[];
     if (cacheResult) {
-      console.log('YES');
       return cacheResult;
     }
 
