@@ -22,6 +22,9 @@ export class StarshipsService {
   public async getStarship(params: GetStarshipParamsDto) {
     const { id } = params;
 
-    return await this.starshipsDataAccessLayer.getStarship(id);
+    const responseResource =
+      await this.starshipsDataAccessLayer.getStarship(id);
+
+    return responseResource.properties;
   }
 }

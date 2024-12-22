@@ -1,7 +1,9 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { PeopleService } from './people.service';
 import { GetPeopleQueryDto, GetPersonParamsDto } from './dtos';
 
+@ApiTags('People')
 @Controller('people')
 export class PeopleController {
   constructor(private readonly peopleService: PeopleService) {}

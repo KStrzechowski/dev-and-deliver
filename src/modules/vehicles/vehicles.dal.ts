@@ -2,6 +2,8 @@ import { HttpException, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { SWAPI_URL, SWAPI_VEHICLES_ROUTE } from 'src/constants';
 import { createRequestQuery } from 'src/helpers';
+import { Vehicle } from './vehicles.entity';
+import { ResponsePaginated, ResponseResource } from 'src/types';
 
 export class VehiclesDataAccessLayer {
   private logger = new Logger(VehiclesDataAccessLayer.name);
@@ -21,7 +23,7 @@ export class VehiclesDataAccessLayer {
       const starshipsRoute = this.getStarshipsRoute(page, limit, name, model);
       const response = await API.get(starshipsRoute);
 
-      result = response.data;
+      result = response.data as ResponsePaginated;
       // TODO - change previous/next page link
     } catch (err) {
       this.logger.error(err);
@@ -53,7 +55,7 @@ export class VehiclesDataAccessLayer {
 
       const response = await API.get(SWAPI_VEHICLES_ROUTE + id);
 
-      return response.data.result;
+      return response.data.result as ResponseResource<Vehicle>;
     } catch (err) {
       this.logger.error(err);
       throw new HttpException(err.response.data, err.response.status);

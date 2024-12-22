@@ -17,6 +17,8 @@ export class PlanetsService {
   public async getPlanet(params: GetPlanetParamsDto) {
     const { id } = params;
 
-    return await this.planetsDataAccessLayer.getPlanet(id);
+    const responseResource = await this.planetsDataAccessLayer.getPlanet(id);
+
+    return responseResource.properties;
   }
 }

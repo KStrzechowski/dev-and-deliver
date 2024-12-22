@@ -1,7 +1,9 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { SpeciesService } from './species.service';
 import { GetSpecieParamsDto, GetSpeciesQueryDto } from './dtos';
 
+@ApiTags('Species')
 @Controller('species')
 export class SpeciesController {
   constructor(private readonly speciesService: SpeciesService) {}

@@ -22,6 +22,8 @@ export class VehiclesService {
   public async getVehicle(params: GetVehicleParamsDto) {
     const { id } = params;
 
-    return await this.vehiclesDataAccessLayer.getVehicle(id);
+    const responseResource = await this.vehiclesDataAccessLayer.getVehicle(id);
+
+    return responseResource.properties;
   }
 }

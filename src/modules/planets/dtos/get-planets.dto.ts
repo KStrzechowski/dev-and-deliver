@@ -4,5 +4,5 @@ import { PaginationDto } from '../../../types';
 export class GetPlanetsQueryDto extends PaginationDto {
   @IsOptional()
   @IsString()
-  name!: string;
+  name?: string;
 }

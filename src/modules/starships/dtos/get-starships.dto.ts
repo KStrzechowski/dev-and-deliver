@@ -4,9 +4,9 @@ import { PaginationDto } from '../../../types';
 export class GetStarshipsQueryDto extends PaginationDto {
   @IsOptional()
   @IsString()
-  name!: string;
+  name?: string;
 
   @IsOptional()
   @IsString()
-  model!: string;
+  model?: string;
 }

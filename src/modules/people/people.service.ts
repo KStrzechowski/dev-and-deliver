@@ -15,6 +15,8 @@ export class PeopleService {
   public async getPerson(params: GetPersonParamsDto) {
     const { id } = params;
 
-    return await this.peopleDataAccessLayer.getPerson(id);
+    const responseResource = await this.peopleDataAccessLayer.getPerson(id);
+
+    return responseResource.properties;
   }
 }

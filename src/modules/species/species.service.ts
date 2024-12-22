@@ -17,6 +17,8 @@ export class SpeciesService {
   public async getSpecie(params: GetSpecieParamsDto) {
     const { id } = params;
 
-    return await this.speciesDataAccessLayer.getSpecie(id);
+    const responseResource = await this.speciesDataAccessLayer.getSpecie(id);
+
+    return responseResource.properties;
   }
 }

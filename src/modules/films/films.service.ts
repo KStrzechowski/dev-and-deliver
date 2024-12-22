@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { FilmsDataAccessLayer } from './films.dal';
 import { GetFilmParamsDto, GetFilmsQueryDto } from './dtos';
 import { PeopleDataAccessLayer } from '../people/people.dal';
+import { People } from '../people/people.entity';
 
 @Injectable()
 export class FilmsService {
@@ -16,10 +17,12 @@ export class FilmsService {
     return await this.filmsDataAccessLayer.getFilms(title);
   }
 
-  public async getFilm(params: GetFilmParamsDto) {
+  public async getFilm(params: GetFilmParamsDto): Promise<People> {
     const { id } = params;
 
-    return await this.filmsDataAccessLayer.getFilm(id);
+    const responseResource = await this.filmsDataAccessLayer.getFilm(id);
+
+    return responseResource.properties;
   }
 
   public async getWordsInOpenings() {

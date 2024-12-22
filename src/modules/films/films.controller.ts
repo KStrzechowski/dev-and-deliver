@@ -1,7 +1,9 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { FilmsService } from './films.service';
 import { GetFilmsQueryDto, GetFilmParamsDto } from './dtos';
 
+@ApiTags('Films')
 @Controller('films')
 export class FilmsController {
   constructor(private readonly filmsService: FilmsService) {}
@@ -16,13 +18,13 @@ export class FilmsController {
     return await this.filmsService.getFilm(params);
   }
 
-  @Get('/opening/words')
-  async getWordsInOpenings() {
-    return await this.filmsService.getWordsInOpenings();
-  }
+  // @Get('/opening/words')
+  // async getWordsInOpenings() {
+  //   return await this.filmsService.getWordsInOpenings();
+  // }
 
-  @Get('/opening/people')
-  async getMostPopularPeopleInOpenings() {
-    return await this.filmsService.getMostPopularPeopleInOpenings();
-  }
+  // @Get('/opening/people')
+  // async getMostPopularPeopleInOpenings() {
+  //   return await this.filmsService.getMostPopularPeopleInOpenings();
+  // }
 }

@@ -2,6 +2,8 @@ import { HttpException, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { SWAPI_FILMS_ROUTE, SWAPI_URL } from 'src/constants';
 import { createRequestQuery } from 'src/helpers';
+import { ResponseResource } from 'src/types';
+import { Film } from './films.entity';
 
 export class FilmsDataAccessLayer {
   private logger = new Logger(FilmsDataAccessLayer.name);
@@ -15,7 +17,7 @@ export class FilmsDataAccessLayer {
       const filmsRoute = this.getFilmsRoute(title);
       const response = await API.get(filmsRoute);
 
-      return response.data.result;
+      return response.data.result as ResponseResource<Film>[];
     } catch (err) {
       this.logger.error(err);
       throw new HttpException(err.response.data, err.response.status);

@@ -4,5 +4,5 @@ import { PaginationDto } from '../../../types';
 export class GetPeopleQueryDto extends PaginationDto {
   @IsOptional()
   @IsString()
-  name!: string;
+  name?: string;
 }
