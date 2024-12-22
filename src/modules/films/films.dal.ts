@@ -35,7 +35,7 @@ export class FilmsDataAccessLayer {
 
       const response = await API.get(SWAPI_FILMS_ROUTE + id);
 
-      return response.data.result;
+      return response.data.result as ResponseResource<Film>;
     } catch (err) {
       this.logger.error(err);
       throw new HttpException(err.response.data, err.response.status);

@@ -18,13 +18,13 @@ export class FilmsController {
     return await this.filmsService.getFilm(params);
   }
 
-  // @Get('/opening/words')
-  // async getWordsInOpenings() {
-  //   return await this.filmsService.getWordsInOpenings();
-  // }
+  @Get('/opening/words')
+  async getWordsInOpenings() {
+    return await this.filmsService.getWordsInOpenings();
+  }
 
-  // @Get('/opening/people')
-  // async getMostPopularPeopleInOpenings() {
-  //   return await this.filmsService.getMostPopularPeopleInOpenings();
-  // }
+  @Get('/opening/people')
+  async getMostPopularPeopleInOpenings() {
+    return await this.filmsService.getMostPopularPeopleInOpenings();
+  }
 }

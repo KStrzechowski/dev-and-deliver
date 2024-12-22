@@ -1,6 +1,7 @@
 import { ConfigModule } from 'nestjs-config';
-import { resolve } from 'path';
 import { Module } from '@nestjs/common';
+import { CacheModule } from '@nestjs/cache-manager';
+import { resolve } from 'path';
 import { FilmsModule } from './modules/films/films.module';
 import { PlanetsModule } from './modules/planets/planets.module';
 import { SpeciesModule } from './modules/species/species.module';
@@ -16,6 +17,10 @@ import { PeopleModule } from './modules/people/people.module';
         modifyConfigName: (name) => name.replace('.config', ''),
       },
     ),
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 1000 * 3600 * 24,
+    }),
     FilmsModule,
     PeopleModule,
     PlanetsModule,
