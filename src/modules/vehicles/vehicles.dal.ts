@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { HttpException, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { SWAPI_URL, SWAPI_VEHICLES_ROUTE } from 'src/constants';
 import { createRequestQuery } from 'src/helpers';
@@ -9,8 +9,8 @@ export class VehiclesDataAccessLayer {
   public async getVehicles(
     page: number,
     limit: number,
-    name: string,
-    model: string,
+    name?: string,
+    model?: string,
   ) {
     let result;
     try {
@@ -25,7 +25,7 @@ export class VehiclesDataAccessLayer {
       // TODO - change previous/next page link
     } catch (err) {
       this.logger.error(err);
-      result = err.message;
+      throw new HttpException(err.response.data, err.response.status);
     }
 
     return result;
@@ -46,19 +46,17 @@ export class VehiclesDataAccessLayer {
     ]);
 
   public async getVehicle(id: string) {
-    let result;
     try {
       const API = axios.create({
         baseURL: SWAPI_URL,
       });
 
       const response = await API.get(SWAPI_VEHICLES_ROUTE + id);
-      result = response.data.result;
+
+      return response.data.result;
     } catch (err) {
       this.logger.error(err);
-      result = err.message;
+      throw new HttpException(err.response.data, err.response.status);
     }
-
-    return result;
   }
 }

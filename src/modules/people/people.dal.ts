@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { HttpException, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { SWAPI_PEOPLE_ROUTE, SWAPI_URL } from 'src/constants';
 import { createRequestQuery } from 'src/helpers';
@@ -7,7 +7,6 @@ export class PeopleDataAccessLayer {
   private logger = new Logger(PeopleDataAccessLayer.name);
 
   public async getPeople(page: number, limit: number, name?: string) {
-    let result;
     try {
       const API = axios.create({
         baseURL: SWAPI_URL,
@@ -16,14 +15,11 @@ export class PeopleDataAccessLayer {
       const peopleRoute = this.getPeopleRoute(page, limit, name);
       const response = await API.get(peopleRoute);
 
-      result = response.data;
-      // TODO - change previous/next page link
+      return response.data;
     } catch (err) {
       this.logger.error(err);
-      result = err.message;
+      throw new HttpException(err.response.data, err.response.status);
     }
-
-    return result;
   }
 
   private getPeopleRoute = (page: number, limit: number, name?: string) =>
@@ -35,19 +31,17 @@ export class PeopleDataAccessLayer {
     ]);
 
   public async getPerson(id: string) {
-    let result;
     try {
       const API = axios.create({
         baseURL: SWAPI_URL,
       });
 
       const response = await API.get(SWAPI_PEOPLE_ROUTE + id);
-      result = response.data.result;
+
+      return response.data.result;
     } catch (err) {
       this.logger.error(err);
-      result = err.message;
+      throw new HttpException(err.response.data, err.response.status);
     }
-
-    return result;
   }
 }
