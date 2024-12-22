@@ -15,4 +15,14 @@ export class FilmsController {
   async getFilm(@Param() params: GetFilmParamsDto) {
     return await this.filmsService.getFilm(params);
   }
+
+  @Get('/opening/words')
+  async getWordsInOpenings() {
+    return await this.filmsService.getWordsInOpenings();
+  }
+
+  @Get('/opening/people')
+  async getMostPopularPeopleInOpenings() {
+    return await this.filmsService.getMostPopularPeopleInOpenings();
+  }
 }
