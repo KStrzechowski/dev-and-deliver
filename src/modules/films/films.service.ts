@@ -3,8 +3,8 @@ import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 import { FilmsDataAccessLayer } from './films.dal';
 import { GetFilmParamsDto, GetFilmsQueryDto } from './dtos';
 import { PeopleDataAccessLayer } from '../people/people.dal';
-import { requestToKey } from 'src/helpers';
-import { ResponseResource } from 'src/types';
+import { requestToKey } from '../../helpers';
+import { ResponseResource, WordOccurrence } from '../../types';
 import { Film } from './films.entity';
 
 @Injectable()
@@ -51,7 +51,9 @@ export class FilmsService {
 
   public async getWordsInOpenings() {
     const cacheKey = '/films/opening/words';
-    const cacheResult = (await this.cacheManager.get(cacheKey)) as Film;
+    const cacheResult = (await this.cacheManager.get(cacheKey)) as [
+      WordOccurrence,
+    ];
     if (cacheResult) {
       return cacheResult;
     }
@@ -92,7 +94,7 @@ export class FilmsService {
       next;
     const limit = 10;
 
-    // TODO - zrobić to asynchronicznie dla wszystkich stron na raz + podzielić na funkcje
+    // TODO - async + split to multiple functions
     do {
       const peopleData = await this.peopleDataAccessLayer.getPeople(
         page,

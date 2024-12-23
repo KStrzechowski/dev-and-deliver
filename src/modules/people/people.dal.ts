@@ -1,8 +1,8 @@
 import { HttpException, Logger } from '@nestjs/common';
 import axios from 'axios';
-import { SWAPI_PEOPLE_ROUTE, SWAPI_URL } from 'src/constants';
-import { createRequestQuery } from 'src/helpers';
-import { ResponsePaginated, ResponseResource } from 'src/types';
+import { SWAPI_PEOPLE_ROUTE, SWAPI_URL } from '../../constants';
+import { createRequestQuery } from '../../helpers';
+import { ResponsePaginated, ResponseResource } from '../../types';
 import { People } from './people.entity';
 
 export class PeopleDataAccessLayer {

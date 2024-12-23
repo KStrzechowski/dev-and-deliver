@@ -1,8 +1,8 @@
 import { HttpException, Logger } from '@nestjs/common';
 import axios from 'axios';
-import { SWAPI_FILMS_ROUTE, SWAPI_URL } from 'src/constants';
-import { createRequestQuery } from 'src/helpers';
-import { ResponseResource } from 'src/types';
+import { SWAPI_FILMS_ROUTE, SWAPI_URL } from '../../constants';
+import { createRequestQuery } from '../../helpers';
+import { ResponseResource } from '../../types';
 import { Film } from './films.entity';
 
 export class FilmsDataAccessLayer {
