@@ -23,7 +23,7 @@ import { PeopleModule } from './modules/people/people.module';
       useFactory: async () => {
         const store = await redisStore({
           socket: {
-            host: 'redis',
+            host: 'redis', // TODO - use env
             port: 6379,
           },
           ttl: 1000 * 3600 * 24,
